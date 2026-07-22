@@ -1,7 +1,8 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-app.js";
 
 import {
-getAuth
+getAuth,
+onAuthStateChanged
 } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-auth.js";
 
 import {
@@ -32,168 +33,170 @@ const db = getFirestore(app);
 
 const chatName = document.getElementById("chatName");
 const backBtn = document.getElementById("backBtn");
-
-backBtn.addEventListener("click", () => {
-history.back();
-});
-
-const urlParams = new URLSearchParams(window.location.search);
-
-const otherUID = urlParams.get("uid");
-
 const messageInput = document.getElementById("messageInput");
 const sendBtn = document.getElementById("sendBtn");
 const messagesBox = document.getElementById("messages");
 
-const currentUID = auth.currentUser?.uid;
+backBtn.addEventListener("click",()=>{
+history.back();
+});
 
-async function loadUser(){
+const urlParams = new URLSearchParams(window.location.search);
+const otherUID = urlParams.get("uid");
 
 if(!otherUID){
-
-chatName.textContent = "Unknown User";
-return;
-
+alert("Invalid chat.");
+window.location.href="home.html";
 }
 
-const userSnap = await getDoc(doc(db,"users",otherUID));
+onAuthStateChanged(auth,async(user)=>{
+
+if(!user){
+window.location.href="login.html";
+return;
+}
+
+const currentUID=user.uid;
+const chatId=[currentUID,otherUID].sort().join("_");
+
+// Load other user's name
+try{
+
+const userSnap=await getDoc(doc(db,"users",otherUID));
 
 if(userSnap.exists()){
 
-chatName.textContent = userSnap.data().name;
+chatName.textContent=userSnap.data().name;
 
 }else{
 
-chatName.textContent = "Unknown User";
+chatName.textContent="Unknown User";
 
 }
 
+}catch(error){
+
+chatName.textContent="Unknown User";
+
 }
 
-loadUser();
+// Send Message
 
-sendBtn.addEventListener("click", async () => {
+sendBtn.addEventListener("click", async ()=>{
 
-    const text = messageInput.value.trim();
+const text=messageInput.value.trim();
 
-    if (!text) return;
+if(text==="") return;
 
-    const currentUID = auth.currentUser.uid;
+try{
 
-    // Create one common chat ID for both users
-    const chatId = [currentUID, otherUID].sort().join("_");
+await addDoc(
+collection(db,"chats",chatId,"messages"),
+{
 
-    try {
+sender:currentUID,
+receiver:otherUID,
+text:text,
+createdAt:serverTimestamp()
 
-        await addDoc(
-            collection(db, "chats", chatId, "messages"),
-            {
-                sender: currentUID,
-                receiver: otherUID,
-                text: text,
-                createdAt: serverTimestamp()
-            }
-        );
+}
+);
 
-        messageInput.value = "";
+messageInput.value="";
 
-    } catch (error) {
+}catch(error){
 
-        alert(error.message);
+alert(error.message);
 
-    }
+}
+
+});
+// Real-time Messages
+
+const q = query(
+collection(db,"chats",chatId,"messages"),
+orderBy("createdAt")
+);
+
+onSnapshot(q,(snapshot)=>{
+
+messagesBox.innerHTML="";
+
+snapshot.forEach((docSnap)=>{
+
+const msg=docSnap.data();
+
+const div=document.createElement("div");
+
+div.dataset.id=docSnap.id;
+
+if(msg.sender===currentUID){
+
+div.className="message myMessage";
+
+}else{
+
+div.className="message otherMessage";
+
+}
+
+div.textContent=msg.text;
+
+messagesBox.appendChild(div);
+
+// Long Press Delete
+
+let pressTimer;
+
+div.addEventListener("touchstart",()=>{
+
+if(msg.sender!==currentUID) return;
+
+pressTimer=setTimeout(async()=>{
+
+const confirmDelete=confirm("Delete this message?");
+
+if(!confirmDelete) return;
+
+try{
+
+await deleteDoc(
+doc(
+db,
+"chats",
+chatId,
+"messages",
+div.dataset.id
+)
+);
+
+}catch(error){
+
+alert(error.message);
+
+}
+
+},700);
 
 });
 
-getAuth().onAuthStateChanged((user) => {
+div.addEventListener("touchend",()=>{
 
-    if (!user) return;
-
-    const chatId = [user.uid, otherUID].sort().join("_");
-
-    const q = query(
-        collection(db, "chats", chatId, "messages"),
-        orderBy("createdAt")
-    );
-
-    onSnapshot(q, (snapshot) => {
-
-        messagesBox.innerHTML = "";
-
-        snapshot.forEach((docSnap) => {
-
-    const msg = docSnap.data();
-
-    const div = document.createElement("div");
-
-    div.dataset.id = docSnap.id;
-
-            div.classList.add("message");
-
-            if (msg.sender === user.uid) {
-
-                div.classList.add("myMessage");
-
-            } else {
-
-                div.classList.add("otherMessage");
-
-            }
-
-            div.textContent = msg.text;
-
-            messagesBox.appendChild(div);
-            
-            let pressTimer;
-
-div.addEventListener("touchstart", () => {
-
-    if (msg.sender !== auth.currentUser.uid) return;
-
-    pressTimer = setTimeout(async () => {
-
-        const confirmDelete = confirm("Delete this message?");
-
-        if (!confirmDelete) return;
-
-        try {
-
-            await deleteDoc(
-                doc(
-                    db,
-                    "chats",
-                    chatId,
-                    "messages",
-                    div.dataset.id
-                )
-            );
-
-        } catch (error) {
-
-            alert(error.message);
-
-        }
-
-    }, 700);
+clearTimeout(pressTimer);
 
 });
 
-div.addEventListener("touchend", () => {
+div.addEventListener("touchmove",()=>{
 
-    clearTimeout(pressTimer);
-
-});
-
-div.addEventListener("touchmove", () => {
-
-    clearTimeout(pressTimer);
+clearTimeout(pressTimer);
 
 });
 
-        });
+});
 
-        messagesBox.scrollTop = messagesBox.scrollHeight;
+messagesBox.scrollTop=messagesBox.scrollHeight;
 
-    });
+});
+// Close authentication block
 
 });
