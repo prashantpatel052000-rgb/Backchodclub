@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form</title>
+    <link rel="stylesheet" href="form.css">
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Form to Apply for Backchod Club</h1>
+
+    <form action="form2.html">
+
+        <div>
+            <label for="username">Enter Your Name:</label>
+            <input type="text" id="username" placeholder="Enter your username">
+        </div>
+
+        <div>
+            <label>Select Gender:</label>
+
+            <div class="radio-group">
+                <label><input type="radio" name="gender" value="nar"> Nar</label>
+                <label><input type="radio" name="gender" value="mada"> Mada</label>
+                <label><input type="radio" name="gender" value="chhakka"> Chhakka</label>
+            </div>
+        </div>
+
+        <div>
+            <label>Select Intellect Level:</label>
+
+            <div class="radio-group">
+                <label><input type="radio" name="intellect"> Bakchod</label>
+                <label><input type="radio" name="intellect"> Chutiya</label>
+            </div>
+        </div>
+
+        <div>
+            <label for="comment">Enter Your Comment:</label>
+
+            <textarea id="comment" placeholder="Tell us something about you"></textarea>
+        </div>
+
+        <div>
+            <label>Select Your Favourite Work:</label>
+
+            <select>
+                <option>Sleeping</option>
+                <option>More Sleeping</option>
+            </select>
+        </div>
+
+        <div>
+            <label>How many years of bakchodi experience do you have?</label>
+
+            <div class="radio-group">
+                <label><input type="radio" name="bakchodi"> Fresher</label>
+                <label><input type="radio" name="bakchodi"> Since School</label>
+                <label><input type="radio" name="bakchodi"> Born With It</label>
+            </div>
+        </div>
+
+        <div>
+            <label>Why do you want to join this club?</label>
+
+            <div class="radio-group">
+                <label><input type="radio" name="reason"> Timepass</label>
+                <label><input type="radio" name="reason"> Friends forced me</label>
+                <label><input type="radio" name="reason"> I have no idea</label>
+            </div>
+        </div>
+
+        <button type="submit">Join the Club</button>
+
+    </form>
+
+</div>
+
+</body>
+</html>

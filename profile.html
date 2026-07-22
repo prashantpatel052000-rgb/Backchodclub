@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Profile</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+background:linear-gradient(135deg,#4facfe,#00f2fe);
+padding:20px 12px;
+}
+
+.container{
+width:100%;
+max-width:700px;
+margin:auto;
+background:#fff;
+border-radius:25px;
+padding:25px;
+box-shadow:0 10px 30px rgba(0,0,0,.2);
+}
+
+.profilePic{
+width:120px;
+height:120px;
+margin:auto;
+border-radius:50%;
+background:#e3f2fd;
+display:flex;
+justify-content:center;
+align-items:center;
+font-size:55px;
+overflow:hidden;
+cursor:pointer;
+border:4px solid #1565c0;
+margin-bottom:15px;
+}
+
+#profileImage{
+width:100%;
+height:100%;
+object-fit:cover;
+border-radius:50%;
+display:none;
+}
+
+h1{
+text-align:center;
+color:#1565c0;
+font-size:36px;
+margin-bottom:8px;
+}
+
+.email{
+text-align:center;
+font-size:18px;
+color:#666;
+margin-bottom:25px;
+}
+
+.sectionTitle{
+color:#1565c0;
+font-size:26px;
+margin:25px 0 15px;
+}
+
+.info{
+background:#f6fbff;
+padding:16px;
+border-radius:15px;
+margin-bottom:12px;
+font-size:17px;
+line-height:1.6;
+box-shadow:0 4px 12px rgba(0,0,0,.05);
+}
+
+strong{
+color:#1565c0;
+}
+
+.postCard{
+background:#f8fbff;
+padding:18px;
+border-radius:15px;
+margin-bottom:15px;
+box-shadow:0 5px 15px rgba(0,0,0,.08);
+}
+
+.postCard p{
+margin:12px 0;
+font-size:17px;
+color:#333;
+}
+
+.statsRow{
+display:flex;
+gap:15px;
+align-items:stretch;
+margin-bottom:25px;
+}
+
+.stats{
+flex:2;
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:12px;
+}
+
+.statBox{
+background:#eef7ff;
+padding:18px;
+border-radius:15px;
+text-align:center;
+box-shadow:0 5px 15px rgba(0,0,0,.08);
+cursor:pointer;
+}
+
+.statBox h3{
+font-size:30px;
+color:#1565c0;
+margin-bottom:8px;
+}
+
+.statBox p{
+font-size:15px;
+color:#666;
+}
+
+.actionBox{
+flex:1;
+display:flex;
+flex-direction:column;
+justify-content:center;
+gap:12px;
+}
+
+.actionBox button{
+margin:0;
+width:100%;
+padding:12px;
+border:none;
+border-radius:15px;
+background:#1565c0;
+color:white;
+font-size:16px;
+font-weight:600;
+cursor:pointer;
+}
+
+button{
+width:100%;
+padding:12px;
+margin-top:15px;
+border:none;
+border-radius:15px;
+background:#1565c0;
+color:white;
+font-size:17px;
+font-weight:600;
+cursor:pointer;
+transition:.3s;
+}
+
+button:hover{
+background:#0d47a1;
+}
+
+#changePhotoBtn,
+#deletePhotoBtn{
+margin-top:12px;
+}
+
+hr{
+border:none;
+height:1px;
+background:#ddd;
+margin:25px 0;
+}
+
+@media(max-width:600px){
+
+.container{
+padding:18px;
+}
+
+.statsRow{
+flex-direction:column;
+}
+
+.stats{
+grid-template-columns:repeat(2,1fr);
+}
+
+.profilePic{
+width:100px;
+height:100px;
+font-size:50px;
+}
+
+h1{
+font-size:30px;
+}
+
+.sectionTitle{
+font-size:22px;
+}
+
+}
+
+</style>
+<body>
+
+<div class="container">
+
+<div style="text-align:center;">
+
+<div class="profilePic" id="profilePic">
+
+<img id="profileImage" src="">
+
+<span id="defaultAvatar">👤</span>
+
+</div>
+
+<input
+type="file"
+id="profileInput"
+accept="image/*"
+style="display:none;">
+
+<button id="changePhotoBtn">
+📷 Change Profile Picture
+</button>
+
+<button id="deletePhotoBtn">
+🗑 Remove Profile Picture
+</button>
+
+<h1 id="name">Loading...</h1>
+
+<p id="email" class="email"></p>
+
+</div>
+
+<div class="statsRow">
+
+<div class="stats">
+
+<div class="statBox" id="followersBox">
+
+<h3 id="followersCount">0</h3>
+
+<p>Followers</p>
+
+</div>
+
+<div class="statBox" id="followingBox">
+
+<h3 id="followingCount">0</h3>
+
+<p>Following</p>
+
+</div>
+
+</div>
+
+<div
+id="actionButtons"
+class="actionBox">
+
+<button id="messageBtn">
+💬 Message
+</button>
+
+<button id="followBtn">
+➕ Follow
+</button>
+
+</div>
+
+</div>
+
+<hr>
+
+<h2 class="sectionTitle">
+📊 My Statistics
+</h2>
+
+<div class="stats">
+
+<div class="statBox">
+
+<h3 id="totalPosts">0</h3>
+
+<p>Posts</p>
+
+</div>
+
+<div class="statBox">
+
+<h3 id="totalLikes">0</h3>
+
+<p>Likes</p>
+
+</div>
+
+<div class="statBox">
+
+<h3 id="totalComments">0</h3>
+
+<p>Comments</p>
+
+</div>
+
+</div>
+
+<hr>
+
+<h2 class="sectionTitle">
+📝 My Posts
+</h2>
+
+<div id="myPosts">
+
+<div class="postCard"
+style="text-align:center;color:#666;">
+
+Loading your posts...
+
+</div>
+
+</div>
+
+<hr>
+
+<h2 class="sectionTitle">
+📋 Personal Information
+</h2>
+<div class="info">
+<strong>Gender:</strong>
+<span id="gender"></span>
+</div>
+
+<div class="info">
+<strong>Intellect:</strong>
+<span id="intellect"></span>
+</div>
+
+<div class="info">
+<strong>Favourite Work:</strong>
+<span id="work"></span>
+</div>
+
+<div class="info">
+<strong>Bakchodi Experience:</strong>
+<span id="experience"></span>
+</div>
+
+<div class="info">
+<strong>Reason to Join Club:</strong>
+<span id="reason"></span>
+</div>
+
+<div class="info">
+<strong>Comment:</strong>
+<span id="comment"></span>
+</div>
+
+<button onclick="window.location.href='home.html'">
+🏠 Back to Home
+</button>
+
+</div>
+
+<div id="memberList" style="
+display:none;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,.6);
+z-index:1000;
+">
+
+<div style="
+background:white;
+width:90%;
+max-width:500px;
+margin:60px auto;
+padding:20px;
+border-radius:20px;
+max-height:70%;
+overflow:auto;
+">
+
+<h2 id="listTitle">Members</h2>
+
+<div id="listContent"></div>
+
+<button id="closeList">
+Close
+</button>
+
+</div>
+
+</div>
+
+<script type="module" src="profile.js"></script>
+
+</body>
+</html>
