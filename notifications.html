@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Notifications</title>
+
+<style>
+
+body{
+margin:0;
+font-family:Poppins,sans-serif;
+background:#f4f8ff;
+}
+
+header{
+background:#1565c0;
+color:white;
+padding:18px;
+font-size:24px;
+font-weight:bold;
+text-align:center;
+}
+
+#notificationList{
+padding:15px;
+}
+
+.notification{
+background:white;
+padding:15px;
+margin-bottom:12px;
+border-radius:12px;
+box-shadow:0 3px 10px rgba(0,0,0,.08);
+cursor:pointer;
+}
+
+.notification h3{
+margin:0;
+font-size:18px;
+}
+
+.notification p{
+margin:8px 0 0;
+color:#666;
+}
+
+.unread{
+border-left:6px solid #1565c0;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+🔔 Notifications
+</header>
+
+<div id="notificationList">
+
+<p style="text-align:center;color:#777;">
+Loading...
+</p>
+
+</div>
+
+<script type="module" src="notifications.js"></script>
+
+</body>
+
+</html>
