@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#1565c0">
+<link rel="stylesheet" href="common.css">
+
+<title>Notifications</title>
+
+<style>
+
+header{
+background:#111;
+color:white;
+padding:18px;
+text-align:center;
+font-size:30px;
+font-weight:800;
+border-radius:22px;
+margin-bottom:22px;
+box-shadow:0 10px 20px rgba(0,0,0,.15);
+}
+
+#notificationList{
+display:flex;
+flex-direction:column;
+gap:16px;
+}
+
+.notification{
+background:white;
+padding:18px;
+border-radius:22px;
+box-shadow:0 8px 18px rgba(0,0,0,.12);
+cursor:pointer;
+transition:.25s;
+}
+
+.notification:active{
+transform:scale(.98);
+}
+
+.notification h3{
+font-size:21px;
+font-weight:700;
+margin-bottom:8px;
+color:#111;
+}
+
+.notification p{
+font-size:16px;
+line-height:1.6;
+color:#555;
+}
+
+.unread{
+border-left:6px solid #16a6ff;
+background:#f8fcff;
+}
+
+@media(max-width:480px){
+
+header{
+font-size:26px;
+padding:16px;
+}
+
+.notification{
+padding:16px;
+}
+
+.notification h3{
+font-size:19px;
+}
+
+.notification p{
+font-size:15px;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+🔔 Notifications
+</header>
+
+<div id="notificationList">
+
+<p style="text-align:center;color:#777;">
+Loading...
+</p>
+
+</div>
+
+<script type="module" src="notifications.js"></script>
+
+</body>
+
+</html>

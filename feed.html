@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Latest Posts</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#1565c0">
+<link rel="stylesheet" href="common.css">
+
+<style>
+
+h1{
+text-align:center;
+font-size:34px;
+font-weight:800;
+color:#111;
+margin:5px 0 25px;
+}
+
+#feed{
+display:flex;
+flex-direction:column;
+gap:18px;
+}
+
+.post{
+background:white;
+padding:20px;
+border-radius:22px;
+box-shadow:0 8px 18px rgba(0,0,0,.12);
+}
+
+.post h3{
+font-size:22px;
+font-weight:700;
+margin-bottom:8px;
+color:#111;
+}
+
+.post small{
+display:block;
+font-size:14px;
+color:#666;
+margin-bottom:12px;
+}
+
+.post p{
+font-size:17px;
+line-height:1.7;
+color:#333;
+margin-bottom:15px;
+word-wrap:break-word;
+}
+
+.actions{
+display:flex;
+gap:20px;
+align-items:center;
+font-size:16px;
+font-weight:600;
+color:#555;
+padding-top:10px;
+border-top:1px solid #eee;
+}
+
+.actions span{
+cursor:pointer;
+transition:.2s;
+}
+
+.actions span:active{
+transform:scale(.95);
+}
+
+@media(max-width:480px){
+
+h1{
+font-size:30px;
+}
+
+.post{
+padding:18px;
+}
+
+.post h3{
+font-size:20px;
+}
+
+.post p{
+font-size:16px;
+}
+
+.actions{
+font-size:15px;
+gap:16px;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>📰 Latest Posts</h1>
+
+<div id="feed">
+
+<p style="text-align:center;color:#777;">
+Loading posts...
+</p>
+
+</div>
+
+</div>
+
+<script type="module" src="feed.js"></script>
+
+</body>
+</html>

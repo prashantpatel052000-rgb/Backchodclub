@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Membership Approved</title>
+  
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="common.css">
+  
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#1565c0">
+  
+  <style>
+.container{
+text-align:center;
+animation:pop .5s ease;
+}
+
+@keyframes pop{
+
+0%{
+transform:scale(.9);
+opacity:0;
+}
+
+100%{
+transform:scale(1);
+opacity:1;
+}
+
+}
+
+.success{
+font-size:90px;
+margin-bottom:10px;
+animation:bounce 1s infinite alternate;
+}
+
+@keyframes bounce{
+
+from{
+transform:translateY(0);
+}
+
+to{
+transform:translateY(-10px);
+}
+
+}
+
+h1{
+margin-bottom:15px;
+}
+
+p{
+font-size:20px;
+line-height:1.7;
+margin:12px 0;
+}
+
+.highlight{
+color:#16a6ff;
+font-weight:800;
+}
+
+.enter-btn{
+display:inline-block;
+margin-top:28px;
+padding:16px 34px;
+background:#111;
+color:white;
+text-decoration:none;
+border-radius:18px;
+font-size:22px;
+font-weight:700;
+box-shadow:0 10px 20px rgba(0,0,0,.18);
+transition:.25s;
+}
+
+.enter-btn:hover{
+transform:translateY(-3px);
+}
+
+.enter-btn:active{
+transform:scale(.97);
+}
+
+@media(max-width:480px){
+
+.success{
+font-size:75px;
+}
+
+h1{
+font-size:34px;
+}
+
+p{
+font-size:18px;
+}
+
+.enter-btn{
+display:block;
+width:100%;
+font-size:20px;
+padding:15px;
+}
+
+}
+  </style>
+</head>
+
+<body>
+  
+  <div class="container">
+    
+    <div class="success">🎉</div>
+    
+    <h1>Congratulations!</h1>
+    
+    <p>Your application has been <span class="highlight">approved successfully.</span></p>
+    
+    <p>You are now a <span class="highlight">Proud Member</span> of the Backchod Club.</p>
+    
+    <a href="home.html">Enter Bakchod Club</a>
+    
+  </div>
+  
+</body>
+
+</html>

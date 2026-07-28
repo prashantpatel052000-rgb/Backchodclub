@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Create Post</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#1565c0">
+<link rel="stylesheet" href="common.css">
+
+<style>
+
+h1{
+text-align:center;
+font-size:34px;
+font-weight:800;
+color:#111;
+margin-bottom:22px;
+}
+
+textarea{
+width:100%;
+min-height:180px;
+padding:16px;
+border:none;
+border-radius:18px;
+background:#f7f7f7;
+font-size:17px;
+outline:none;
+resize:vertical;
+box-shadow:0 5px 12px rgba(0,0,0,.08);
+margin-bottom:20px;
+}
+
+.fileBox{
+background:#f7f7f7;
+padding:18px;
+border-radius:20px;
+margin-bottom:20px;
+box-shadow:0 5px 12px rgba(0,0,0,.08);
+}
+
+.fileBox label{
+display:block;
+font-size:18px;
+font-weight:700;
+color:#111;
+margin-bottom:10px;
+}
+
+input[type=file]{
+width:100%;
+font-size:16px;
+padding:8px;
+}
+
+#preview{
+margin-top:20px;
+text-align:center;
+}
+
+#preview img,
+#preview video{
+width:100%;
+max-width:100%;
+border-radius:18px;
+margin-top:10px;
+box-shadow:0 10px 20px rgba(0,0,0,.15);
+}
+
+.publishBtn{
+margin-top:10px;
+}
+
+@media(max-width:480px){
+
+h1{
+font-size:30px;
+}
+
+textarea{
+font-size:16px;
+padding:14px;
+min-height:160px;
+}
+
+.fileBox{
+padding:16px;
+}
+
+.fileBox label{
+font-size:17px;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>😂 Create a Post</h1>
+
+<textarea
+id="postText"
+placeholder="What's on your mind today?">
+</textarea>
+
+<div class="fileBox">
+
+<label>📷 Upload Image</label>
+
+<input
+type="file"
+id="imageInput"
+accept="image/*">
+
+</div>
+
+<div class="fileBox">
+
+<label>🎥 Upload Video</label>
+
+<input
+type="file"
+id="videoInput"
+accept="video/*">
+
+</div>
+
+<div id="preview"></div>
+
+<button id="postBtn">
+
+ Post
+
+</button>
+
+</div>
+
+<script type="module" src="createpost.js"></script>
+
+</body>
+</html>

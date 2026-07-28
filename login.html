@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TEST LOGIN</title>
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#1565c0">
+    <link rel="stylesheet" href="common.css">
+
+<style>
+.logo{
+display:flex;
+justify-content:center;
+margin-bottom:18px;
+}
+
+.logo img{
+width:95px;
+height:95px;
+object-fit:contain;
+}
+
+h2{
+margin-bottom:25px;
+}
+
+.password-box{
+position:relative;
+width:100%;
+}
+
+.password-box input{
+padding-right:55px;
+}
+
+#togglePassword{
+position:absolute;
+right:18px;
+top:50%;
+transform:translateY(-50%);
+font-size:22px;
+cursor:pointer;
+user-select:none;
+transition:.2s;
+}
+
+#togglePassword:active{
+transform:translateY(-50%) scale(.9);
+}
+
+button{
+margin-top:10px;
+}
+
+#forgotPassword{
+display:block;
+margin-top:18px;
+text-align:center;
+font-size:16px;
+font-weight:700;
+text-decoration:none;
+}
+
+@media(max-width:480px){
+
+.logo img{
+width:85px;
+height:85px;
+}
+
+h2{
+font-size:28px;
+}
+
+#togglePassword{
+font-size:20px;
+}
+
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="logo">
+    <img src="bc-logo.png" alt="Bakchod Club Logo">
+</div>
+
+<div>
+    <h2>Login</h2>
+</div>
+
+<form id="loginForm">
+
+    <div>
+        <label>Email:</label>
+        <input type="email" id="loginEmail" placeholder="Enter your email" required>
+    </div>
+
+<div>
+    <label>Password:</label>
+
+    <div class="password-box">
+        <input type="password"
+               id="loginPassword"
+               placeholder="Enter your password"
+               required>
+
+        <span id="togglePassword">👁️</span>
+    </div>
+</div>
+
+   <div>
+    <button type="submit">Login</button>
+  </div>
+    
+  <p>
+    <a href="#" id="forgotPassword">Forgot Password?</a>
+  </p>
+
+</form>
+
+<p>
+Don't have an account?
+<a href="index.html">Join Club</a>
+</p>
+
+</div>
+
+<script type="module" src="login.js"></script>
+
+</body>
+</html>

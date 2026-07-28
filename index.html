@@ -1,0 +1,170 @@
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Backchod Club - Registration</title>
+
+    <link rel="stylesheet" href="common.css">
+
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#1565c0">
+    
+   <style>
+.logo-section{
+text-align:center;
+margin-bottom:22px;
+}
+
+.logo{
+width:100px;
+height:100px;
+border-radius:28px;
+object-fit:cover;
+margin-bottom:10px;
+}
+
+.logo-section h1{
+font-size:40px;
+font-weight:800;
+margin-bottom:8px;
+}
+
+.tagline{
+font-size:17px;
+color:#333;
+margin-top:6px;
+margin-bottom:20px;
+}
+
+.form-card h2{
+margin-bottom:25px;
+}
+
+textarea{
+min-height:120px;
+}
+
+.radio-group{
+margin-bottom:18px;
+}
+
+.login-link{
+text-align:center;
+margin-top:22px;
+font-size:18px;
+}
+
+.login-link a{
+font-weight:700;
+}
+
+@media(max-width:480px){
+
+.logo{
+width:90px;
+height:90px;
+}
+
+.logo-section h1{
+font-size:34px;
+}
+
+.tagline{
+font-size:15px;
+}
+
+}
+
+</style>
+    
+</head>
+<body>  
+
+<div class="container">  
+
+<h1>Form to Apply for Backchod Club</h1>  
+
+<form id="clubForm">  
+
+    <div>  
+        <label for="username">Enter Your Name:</label>  
+        <input type="text" id="username" placeholder="Enter your username" required>  
+
+        <br><br>  
+
+        <label for="email">Enter Your Email:</label>  
+        <input type="email" id="email" placeholder="Enter your email" required>  
+
+        <br><br>  
+
+        <label for="password">Create Password:</label>  
+        <input type="password" id="password" placeholder="Create a password" required>  
+    </div>  
+
+    <div>  
+        <label>Select Gender:</label>  
+
+        <div class="radio-group">  
+            <label><input type="radio" name="gender" value="nar" required> Nar</label>  
+            <label><input type="radio" name="gender" value="mada"> Mada</label>  
+            <label><input type="radio" name="gender" value="chhakka"> Chhakka</label>  
+        </div>  
+    </div>  
+
+    <div>  
+        <label>Select Intellect Level:</label>  
+
+        <div class="radio-group">  
+            <label><input type="radio" name="intellect" value="Bakchod" required> Bakchod</label>  
+            <label><input type="radio" name="intellect" value="Chutiya"> Chutiya</label>  
+        </div>  
+    </div>  
+
+    <div>  
+        <label for="comment">Enter Your Comment:</label>  
+
+        <textarea id="comment" placeholder="Tell us something about you" required></textarea>  
+    </div>  
+
+    <div>  
+        <label>Select Your Favourite Work:</label>  
+
+        <select id="favouriteWork">  
+            <option>Sleeping</option>  
+            <option>More Sleeping</option>  
+        </select>  
+    </div>  
+
+    <div>  
+        <label>How many years of bakchodi experience do you have?</label>  
+
+        <div class="radio-group">  
+            <label><input type="radio" name="bakchodi" value="Fresher" required> Fresher</label>  
+            <label><input type="radio" name="bakchodi" value="Since School"> Since School</label>  
+            <label><input type="radio" name="bakchodi" value="Born With It"> Born With It</label>  
+        </div>  
+    </div>  
+
+    <div>  
+        <label>Why do you want to join this club?</label>  
+
+        <div class="radio-group">  
+            <label><input type="radio" name="reason" value="Timepass" required> Timepass</label>  
+            <label><input type="radio" name="reason" value="Friends Forced Me"> Friends Forced Me</label>  
+            <label><input type="radio" name="reason" value="I Have No Idea"> I Have No Idea</label>  
+        </div>  
+    </div>  
+
+    <button type="submit">Join the Club</button>  
+
+</form>  
+
+<p>Already a member?</p>  
+
+<a href="login.html">Login Here</a>
+
+</div>  
+<script type="module" src="auth.js"></script>  
+
+</body> 
+</html>
