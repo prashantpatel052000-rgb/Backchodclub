@@ -15,6 +15,8 @@ export async function createNotification(to, from, type, text) {
 
     try {
 
+        console.log("createNotification called", to, from, type, text);
+
         // Don't notify yourself
         if (to === from) return;
 
@@ -28,6 +30,8 @@ export async function createNotification(to, from, type, text) {
 
         const snapshot = await getDocs(q);
 
+        // If the same unread notification already exists,
+        // just update its timestamp.
         if (!snapshot.empty) {
 
             await updateDoc(
@@ -37,24 +41,27 @@ export async function createNotification(to, from, type, text) {
                 }
             );
 
+            console.log("Existing notification updated");
             return;
-
         }
 
-        await addDoc(collection(db,"notifications"),{
+        console.log("Saving notification...");
 
-receiverId,
-senderId,
-message,
-createdAt: serverTimestamp(),
+        await addDoc(collection(db, "notifications"), {
+            to: to,
+            from: from,
+            type: type,
+            text: text,
+            createdAt: serverTimestamp(),
+            read: false
+        });
 
-read: false
-
-});
+        console.log("Notification saved successfully");
 
     } catch (error) {
 
-        console.log(error);
+        console.error("Notification Error:", error);
+        alert(error.message);
 
     }
 
