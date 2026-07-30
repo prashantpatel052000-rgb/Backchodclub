@@ -61,13 +61,14 @@ voiceCallBtn.addEventListener("click", async () => {
 
         await addDoc(collection(db, "calls"), {
 
-            caller: currentUID,
-            receiver: otherUID,
-            status: "ringing",
-            type: "voice",
-            createdAt: serverTimestamp()
+    caller: currentUID,
+    receiver: otherUID,
+    status: "ringing",
+    answered: false,
+    type: "voice",
+    createdAt: serverTimestamp()
 
-        });
+});
 
         alert("Calling...");
 
