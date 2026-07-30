@@ -20,7 +20,12 @@ async function loadCall() {
 
     const callSnap = await getDoc(doc(db, "calls", callId));
 
-    if (!callSnap.exists()) return;
+    if (!callSnap.exists()) {
+
+        window.location.href = "home.html";
+        return;
+
+    }
 
     const call = callSnap.data();
 
@@ -45,18 +50,29 @@ loadCall();
 acceptBtn.onclick = async () => {
 
     await updateDoc(doc(db, "calls", callId), {
-        status: "accepted"
+
+        status: "accepted",
+
+        answered: true
+
     });
 
-    alert("Voice call coming in next step.");
+    window.location.href =
+    `voiceCall.html?callId=${callId}`;
 
 };
 
 rejectBtn.onclick = async () => {
 
     await updateDoc(doc(db, "calls", callId), {
-        status: "rejected"
+
+        status: "rejected",
+
+        answered: true
+
     });
+
+    localStorage.removeItem("currentCall");
 
     window.location.href = "home.html";
 
