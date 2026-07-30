@@ -59,18 +59,54 @@ voiceCallBtn.addEventListener("click", async () => {
 
     try {
 
-        await addDoc(collection(db, "calls"), {
+        const callRef = await addDoc(
+            collection(db, "calls"),
+            {
 
-    caller: currentUID,
-    receiver: otherUID,
-    status: "ringing",
-    answered: false,
-    type: "voice",
-    createdAt: serverTimestamp()
+                caller: currentUID,
+                receiver: otherUID,
 
-});
+                status: "ringing",
+                answered: false,
+
+                type: "voice",
+
+                createdAt: serverTimestamp()
+
+            }
+        );
 
         alert("Calling...");
+
+        onSnapshot(
+            doc(db, "calls", callRef.id),
+            (snapshot) => {
+
+                if (!snap.exists()) return;
+
+                const call = snap.data();
+
+                if (call.status === "accepted") {
+
+                    window.location.href =
+                        `voiceCall.html?callId=${callRef.id}`;
+
+                }
+
+                if (call.status === "rejected") {
+
+                    alert("❌ Call Declined");
+
+                }
+
+                if (call.status === "ended") {
+
+                    alert("📞 Call Ended");
+
+                }
+
+            }
+        );
 
     } catch (error) {
 
@@ -227,6 +263,5 @@ clearTimeout(pressTimer);
 messagesBox.scrollTop=messagesBox.scrollHeight;
 
 });
-// Close authentication block
 
 });
