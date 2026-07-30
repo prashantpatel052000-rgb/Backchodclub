@@ -11,6 +11,9 @@ import {
     onAuthStateChanged
 } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-auth.js";
 
+console.log("Call Listener Loaded");
+alert("Call Listener Loaded");
+
 onAuthStateChanged(auth, (user) => {
 
     if (!user) return;
