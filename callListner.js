@@ -1,3 +1,4 @@
+alert("callListener file loaded");
 import { auth, db } from "./firebase.js";
 
 import {
