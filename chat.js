@@ -37,8 +37,7 @@ const chatName = document.getElementById("chatName");
 const messageInput = document.getElementById("messageInput");
 const sendBtn = document.getElementById("sendBtn");
 const messagesBox = document.getElementById("messages");
-
-
+const voiceCallBtn = document.getElementById("voiceCallBtn");
 const urlParams = new URLSearchParams(window.location.search);
 const otherUID = urlParams.get("uid");
 
@@ -56,6 +55,30 @@ return;
 
 const currentUID=user.uid;
 const chatId=[currentUID,otherUID].sort().join("_");
+voiceCallBtn.addEventListener("click", async () => {
+
+    try {
+
+        await addDoc(collection(db, "calls"), {
+
+            caller: currentUID,
+            receiver: otherUID,
+            status: "ringing",
+            type: "voice",
+            createdAt: serverTimestamp()
+
+        });
+
+        alert("Calling...");
+
+    } catch (error) {
+
+        alert(error.message);
+        console.log(error);
+
+    }
+
+});
 
 // Load other user's name
 try{
