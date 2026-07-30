@@ -1,4 +1,5 @@
 import { auth, db } from "./firebase.js";
+
 import {
     collection,
     query,
@@ -10,6 +11,8 @@ import {
     onAuthStateChanged
 } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-auth.js";
 
+const handledCalls = new Set();
+
 onAuthStateChanged(auth, (user) => {
 
     if (!user) return;
@@ -17,17 +20,19 @@ onAuthStateChanged(auth, (user) => {
     const q = query(
         collection(db, "calls"),
         where("receiver", "==", user.uid),
-        where("status", "==", "ringing")
+        where("status", "==", "ringing"),
+        where("answered", "==", false)
     );
 
     onSnapshot(q, (snapshot) => {
 
         snapshot.forEach((callDoc) => {
 
-            localStorage.setItem(
-                "currentCall",
-                callDoc.id
-            );
+            if (handledCalls.has(callDoc.id)) return;
+
+            handledCalls.add(callDoc.id);
+
+            localStorage.setItem("currentCall", callDoc.id);
 
             window.location.href = "incomingCall.html";
 
