@@ -57,6 +57,8 @@ acceptBtn.onclick = async () => {
 
     });
 
+    localStorage.removeItem("currentCall");
+
     window.location.href =
     `voiceCall.html?callId=${callId}`;
 
