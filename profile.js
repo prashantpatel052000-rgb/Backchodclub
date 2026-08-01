@@ -76,6 +76,9 @@ const profileUID = urlParams.get("uid") || user.uid;
 
 const isMyProfile = profileUID === user.uid;
 
+const logoutBtnEl = document.getElementById("logoutBtn");
+logoutBtnEl.style.display = isMyProfile ? "block" : "none";
+
 if(isMyProfile){
 
 followBtn.style.display = "none";
@@ -118,7 +121,14 @@ followBtn.textContent = "➕ Follow";
 }
 
 document.getElementById("name").textContent=data.name;
-document.getElementById("email").textContent=data.email;
+
+if (isMyProfile) {
+    document.getElementById("email").textContent = data.email;
+    document.getElementById("email").style.display = "block";
+} else {
+    document.getElementById("email").style.display = "none";
+}
+
 document.getElementById("gender").textContent=data.gender;
 document.getElementById("intellect").textContent=data.intellect;
 document.getElementById("work").textContent=data.favouriteWork;
@@ -177,13 +187,15 @@ post.mediaType==="video"
 :""
 }
 
-<button
+${
+isMyProfile
+?`<button
 class="deleteBtn"
 data-id="${postDoc.id}">
 🗑 Delete Post
-</button>
-
-</div>
+</button>`
+:""
+}
 
 `;
 
@@ -203,6 +215,8 @@ const confirmDelete=confirm(
 if(!confirmDelete) return;
 
 try{
+
+if (!isMyProfile) return;
 
 await deleteDoc(doc(db,"posts",btn.dataset.id));
 
@@ -518,6 +532,13 @@ messageBtn.addEventListener("click", () => {
 
 });
 document.getElementById("logoutBtn").addEventListener("click", async () => {
+
+const urlParams = new URLSearchParams(window.location.search);
+const viewedUID = urlParams.get("uid");
+
+if (viewedUID && auth.currentUser && viewedUID !== auth.currentUser.uid) {
+    return;
+}
 
 await signOut(auth);  
 window.location.href = "login.html";
