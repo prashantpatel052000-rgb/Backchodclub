@@ -1,0 +1,8 @@
+[{
+      "relation": ["delegate_permission/common.handle_all_urls"],
+      "target": {
+        "namespace": "android_app",
+        "package_name": "io.github.prashantpatel052000_rgb.twa",
+        "sha256_cert_fingerprints": ["22:91:23:3C:64:17:1C:79:9A:5D:9D:80:63:14:3D:7C:E4:1D:37:4E:6F:8B:11:85:2F:8F:67:57:C5:DF:EF:5C"]
+      }
+    }]
