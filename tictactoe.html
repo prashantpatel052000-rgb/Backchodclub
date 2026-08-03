@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Tic-Tac-Toe - Backchod Club</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#1565c0">
+<link rel="stylesheet" href="common.css">
+
+<style>
+
+body{
+display:flex;
+flex-direction:column;
+align-items:center;
+}
+
+.ttHeader{
+width:100%;
+max-width:480px;
+display:flex;
+align-items:center;
+gap:12px;
+margin-bottom:10px;
+}
+
+.backBtn{
+font-size:26px;
+text-decoration:none;
+color:#111;
+}
+
+.vsText{
+font-size:20px;
+}
+
+#statusText{
+font-size:18px;
+margin:18px 0;
+text-align:center;
+}
+
+.board{
+display:grid;
+grid-template-columns:repeat(3,90px);
+grid-template-rows:repeat(3,90px);
+gap:10px;
+background:white;
+padding:14px;
+border-radius:26px;
+box-shadow:0 12px 22px rgba(0,0,0,.15);
+}
+
+.cell{
+background:#f2f2f2;
+border-radius:16px;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:38px;
+font-weight:700;
+}
+
+.cell.mine{ color:#1565c0; }
+.cell.theirs{ color:#ff2d55; }
+
+#leaveBtn{
+margin-top:26px;
+background:#111;
+color:#fff;
+border:none;
+padding:14px 30px;
+border-radius:16px;
+font-weight:700;
+font-size:16px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="ttHeader">
+<span class="vsText" id="vsText">Tic-Tac-Toe</span>
+</div>
+
+<h3 id="statusText">Loading game...</h3>
+
+<div class="board" id="board">
+    <div class="cell" data-i="0"></div>
+    <div class="cell" data-i="1"></div>
+    <div class="cell" data-i="2"></div>
+    <div class="cell" data-i="3"></div>
+    <div class="cell" data-i="4"></div>
+    <div class="cell" data-i="5"></div>
+    <div class="cell" data-i="6"></div>
+    <div class="cell" data-i="7"></div>
+    <div class="cell" data-i="8"></div>
+</div>
+
+<button id="leaveBtn">Leave Game</button>
+
+</div>
+
+<script type="module" src="tictactoe.js"></script>
+
+</body>
+</html>
