@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Games - Backchod Club</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#1565c0">
+<link rel="stylesheet" href="common.css">
+
+<style>
+
+.gamesHeader{
+display:flex;
+align-items:center;
+gap:12px;
+margin-bottom:20px;
+}
+
+.backBtn{
+font-size:26px;
+text-decoration:none;
+color:#111;
+}
+
+.gamesHeader h1{
+font-size:28px;
+}
+
+.gameGrid{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:18px;
+margin-bottom:30px;
+}
+
+.gameTile{
+background:white;
+border-radius:26px;
+padding:25px 15px;
+text-align:center;
+box-shadow:0 12px 22px rgba(0,0,0,.15);
+transition:.25s;
+}
+
+.gameTile:not(.locked):active{
+transform:scale(.96);
+}
+
+.gameTile.locked{
+opacity:.5;
+}
+
+.gameTile span{
+font-size:42px;
+display:block;
+margin-bottom:10px;
+}
+
+.gameTile h3{
+font-size:20px;
+}
+
+.gameTile p{
+margin-top:4px;
+font-size:13px;
+color:#666;
+}
+
+.sectionTitle{
+font-size:22px;
+margin:10px 0 15px;
+}
+
+.inviteCard{
+background:white;
+padding:18px;
+border-radius:22px;
+margin-bottom:15px;
+box-shadow:0 8px 18px rgba(0,0,0,.12);
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:10px;
+}
+
+.inviteActions button{
+border:none;
+padding:10px 16px;
+border-radius:16px;
+font-weight:700;
+margin-left:6px;
+}
+
+.acceptBtn{ background:#111; color:#fff; }
+.declineBtn{ background:#eee; color:#333; }
+
+.gameCard{
+background:white;
+padding:18px;
+border-radius:22px;
+margin-bottom:15px;
+box-shadow:0 8px 18px rgba(0,0,0,.12);
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+.challengeBtn{
+background:#111;
+color:#fff;
+border:none;
+padding:10px 16px;
+border-radius:16px;
+font-weight:700;
+}
+
+.emptyText{
+color:#555;
+font-size:15px;
+padding:5px 0;
+}
+
+/* ---------- Popup ---------- */
+
+.overlay{
+display:none;
+position:fixed;
+inset:0;
+background:rgba(0,0,0,0.45);
+align-items:flex-end;
+justify-content:center;
+z-index:50;
+}
+
+.overlay.show{
+display:flex;
+}
+
+.popup{
+background:white;
+width:100%;
+max-width:480px;
+border-radius:28px 28px 0 0;
+padding:24px 20px 30px;
+box-sizing:border-box;
+box-shadow:0 -12px 30px rgba(0,0,0,.18);
+}
+
+.popupHeader{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:16px;
+}
+
+.popupHeader h2{
+font-size:22px;
+}
+
+.closePopup{
+font-size:22px;
+background:none;
+border:none;
+color:#111;
+}
+
+.popupSearchBox{
+background:#f2f2f2;
+border-radius:40px;
+padding:14px 18px;
+display:flex;
+align-items:center;
+gap:10px;
+margin-bottom:16px;
+}
+
+#opponentSearch{
+border:none;
+outline:none;
+flex:1;
+font-size:16px;
+background:transparent;
+}
+
+#searchResultsBox{
+background:white;
+border-radius:18px;
+overflow:hidden;
+}
+
+.opponentResult{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:15px;
+border-bottom:1px solid #eee;
+}
+
+.opponentResult button{
+background:#111;
+color:#fff;
+border:none;
+padding:8px 16px;
+border-radius:16px;
+font-weight:700;
+}
+
+@media(max-width:480px){
+
+.gameGrid{
+gap:14px;
+}
+
+.gameTile{
+padding:20px 10px;
+}
+
+.gameTile span{
+font-size:36px;
+}
+
+.gameTile h3{
+font-size:18px;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="gamesHeader">
+<h1>🎮 Games</h1>
+</div>
+
+<div class="gameGrid" id="gameGrid">
+
+<div class="gameTile" data-game="tictactoe">
+<span>⭕</span>
+<h3>Tic-Tac-Toe</h3>
+</div>
+
+<div class="gameTile locked">
+<span>🃏</span>
+<h3>Game 2</h3>
+<p>Coming soon</p>
+</div>
+
+<div class="gameTile locked">
+<span>🎯</span>
+<h3>Game 3</h3>
+<p>Coming soon</p>
+</div>
+
+<div class="gameTile locked">
+<span>🧩</span>
+<h3>Game 4</h3>
+<p>Coming soon</p>
+</div>
+
+<div class="gameTile locked">
+<span>🎲</span>
+<h3>Game 5</h3>
+<p>Coming soon</p>
+</div>
+
+</div>
+
+<h3 class="sectionTitle">📩 Incoming Challenges</h3>
+<div id="incomingInvites">
+<p class="emptyText">No incoming challenges right now.</p>
+</div>
+
+<h3 class="sectionTitle">🎯 Your Active Games</h3>
+<div id="activeGames">
+<p class="emptyText">No active games yet — tap a game above to challenge someone!</p>
+</div>
+
+</div>
+
+<!-- ---------- Challenge Popup ---------- -->
+
+<div class="overlay" id="challengeOverlay">
+<div class="popup">
+
+<div class="popupHeader">
+<h2>Challenge a member</h2>
+<button class="closePopup" id="closePopup">✕</button>
+</div>
+
+<div class="popupSearchBox">
+🔍
+<input id="opponentSearch" placeholder="Search a member...">
+</div>
+
+<div id="searchResultsBox"></div>
+
+</div>
+</div>
+
+<script type="module" src="games.js"></script>
+
+</body>
+</html>
