@@ -79,6 +79,13 @@ const isMyProfile = profileUID === user.uid;
 const logoutBtnEl = document.getElementById("logoutBtn");
 logoutBtnEl.style.display = isMyProfile ? "block" : "none";
 
+changePhotoBtn.style.display = isMyProfile ? "block" : "none";
+deletePhotoBtn.style.display = isMyProfile ? "block" : "none";
+
+if(isMyProfile){
+
+followBtn.style.display = "none";
+
 if(isMyProfile){
 
 followBtn.style.display = "none";
@@ -276,6 +283,11 @@ const file=profileInput.files[0];
 
 if(!file) return;
 
+const urlParamsGuard = new URLSearchParams(window.location.search);
+const profileUIDGuard = urlParamsGuard.get("uid") || currentUser.uid;
+
+if (profileUIDGuard !== currentUser.uid) return;
+
 try{
 
 changePhotoBtn.innerText="Uploading...";
@@ -309,6 +321,11 @@ changePhotoBtn.innerText="📷 Change Profile Picture";
 deletePhotoBtn.addEventListener("click", async () => {
 
 if(!currentUser) return;
+
+const urlParamsGuard = new URLSearchParams(window.location.search);
+const profileUIDGuard = urlParamsGuard.get("uid") || currentUser.uid;
+
+if (profileUIDGuard !== currentUser.uid) return;
 
 const confirmDelete=confirm(
 "Remove your profile picture?"
