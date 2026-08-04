@@ -21,6 +21,7 @@ arrayRemove
 } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-firestore.js";
 
 import { createNotification } from "./notificationHelper.js";
+import { escapeHTML } from "./sanitize.js";
 
 const firebaseConfig={
 apiKey:"AIzaSyDJei-ATL-ka3b-bkD0nSvNZnUTMnCwS2k",
@@ -176,17 +177,17 @@ myPosts.innerHTML+=`
 
 <div class="postCard">
 
-<p>${post.text||""}</p>
+<p>${escapeHTML(post.text) || ""}</p>
 
 ${
 post.mediaType==="image"
-?`<img src="${post.mediaUrl}" style="width:100%;border-radius:15px;margin-top:10px;">`
+?`<img src="${escapeHTML(post.mediaUrl)}" style="width:100%;border-radius:15px;margin-top:10px;">`
 :""
 }
 
 ${
 post.mediaType==="video"
-?`<video controls style="width:100%;border-radius:15px;margin-top:10px;"><source src="${post.mediaUrl}"></video>`
+?`<video controls style="width:100%;border-radius:15px;margin-top:10px;"><source src="${escapeHTML(post.mediaUrl)}"></video>`
 :""
 }
 
@@ -451,7 +452,7 @@ padding:15px;
 border-bottom:1px solid #ddd;
 cursor:pointer;
 ">
-${member.name}
+${escapeHTML(member.name)}
 </div>
 `;
 
@@ -505,7 +506,7 @@ padding:15px;
 border-bottom:1px solid #ddd;
 cursor:pointer;
 ">
-${member.name}
+${escapeHTML(member.name)}
 </div>
 `;
 
