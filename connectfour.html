@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Connect Four - Backchod Club</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#1565c0">
+<link rel="stylesheet" href="common.css">
+
+<style>
+
+body{
+display:flex;
+flex-direction:column;
+align-items:center;
+}
+
+.ttHeader{
+width:100%;
+max-width:480px;
+display:flex;
+align-items:center;
+gap:12px;
+margin-bottom:10px;
+}
+
+.backBtn{
+font-size:26px;
+text-decoration:none;
+color:#111;
+}
+
+.vsText{
+font-size:20px;
+}
+
+#statusText{
+font-size:18px;
+margin:18px 0;
+text-align:center;
+}
+
+.board{
+display:grid;
+grid-template-columns:repeat(7,40px);
+grid-template-rows:repeat(6,40px);
+gap:6px;
+background:#1565c0;
+padding:12px;
+border-radius:22px;
+box-shadow:0 12px 22px rgba(0,0,0,.15);
+}
+
+.cell{
+width:40px;
+height:40px;
+border-radius:50%;
+background:#f2f2f2;
+}
+
+.cell.R{ background:#ff2d55; }
+.cell.Y{ background:#ffcc00; }
+
+.colHint{
+display:grid;
+grid-template-columns:repeat(7,40px);
+gap:6px;
+margin-bottom:6px;
+max-width:328px;
+}
+
+.colBtn{
+width:40px;
+height:26px;
+border:none;
+background:none;
+font-size:16px;
+color:#666;
+}
+
+#leaveBtn{
+margin-top:26px;
+background:#111;
+color:#fff;
+border:none;
+padding:14px 30px;
+border-radius:16px;
+font-weight:700;
+font-size:16px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="ttHeader">
+
+<span class="vsText" id="vsText">Connect Four</span>
+</div>
+
+<h3 id="statusText">Loading game...</h3>
+
+<div class="colHint" id="colHint">
+    <button class="colBtn" data-col="0">▼</button>
+    <button class="colBtn" data-col="1">▼</button>
+    <button class="colBtn" data-col="2">▼</button>
+    <button class="colBtn" data-col="3">▼</button>
+    <button class="colBtn" data-col="4">▼</button>
+    <button class="colBtn" data-col="5">▼</button>
+    <button class="colBtn" data-col="6">▼</button>
+</div>
+
+<div class="board" id="board"></div>
+
+<button id="leaveBtn">Leave Game</button>
+
+</div>
+
+<script type="module" src="connectfour.js"></script>
+
+</body>
+</html>
