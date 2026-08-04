@@ -15,6 +15,8 @@ import {
 onAuthStateChanged
 } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-auth.js";
 
+import { escapeHTML } from "./sanitize.js";
+
 window.onerror = function(message){
     alert(message);
 };
@@ -95,7 +97,7 @@ for (const notificationDoc of snapshot.docs) {
     <div style="display:flex;align-items:center;gap:12px;">
 
         <img
-        src="${senderPhoto || ""}"
+        src="${escapeHTML(senderPhoto) || ""}"
         style="
         width:50px;
         height:50px;
@@ -106,9 +108,9 @@ for (const notificationDoc of snapshot.docs) {
 
         <div>
 
-            <b>${senderName}</b><br>
+           <b>${escapeHTML(senderName)}</b><br>
 
-            ${notification.text}
+${escapeHTML(notification.text)}
 
         </div>
 
