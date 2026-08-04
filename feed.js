@@ -19,6 +19,7 @@ import {
 } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-firestore.js";
 
 import { createNotification } from "./notificationHelper.js";
+import { escapeHTML } from "./sanitize.js";
 
 const firebaseConfig = {
     apiKey: "AIzaSyDJei-ATL-ka3b-bkD0nSvNZnUTMnCwS2k",
@@ -81,17 +82,17 @@ async function loadPosts() {
 
 <div class="post">
 
-<h3>👤 ${post.name}</h3>
+<h3>👤 ${escapeHTML(post.name)}</h3>
 
-<small>${post.email}</small>
+<small>${escapeHTML(post.email)}</small>
 
-<p>${post.text || ""}</p>
+<p>${escapeHTML(post.text) || ""}</p>
 
 ${
 post.mediaType==="image"
 ?`
 <img
-src="${post.mediaUrl}"
+src="${escapeHTML(post.mediaUrl)}"
 style="
 width:100%;
 margin-top:12px;
@@ -114,7 +115,7 @@ margin-top:12px;
 border-radius:15px;
 max-height:500px;
 ">
-<source src="${post.mediaUrl}">
+<source src="${escapeHTML(post.mediaUrl)}">
 </video>
 `
 :""
@@ -164,8 +165,8 @@ ${comments.map(comment=>`
 padding:8px 0;
 border-bottom:1px solid #eee;
 ">
-<b>${comment.name}</b><br>
-${comment.text}
+<b>${escapeHTML(comment.name)}</b><br>
+${escapeHTML(comment.text)}
 </div>
 `).join("")}
 
