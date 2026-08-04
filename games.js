@@ -24,9 +24,29 @@ const activeGames = document.getElementById("activeGames");
 
 const challengeOverlay = document.getElementById("challengeOverlay");
 const closePopup = document.getElementById("closePopup");
+const popupTitle = document.getElementById("popupTitle");
 
 let currentUID = null;
 let selectedGame = "tictactoe";
+
+// ---------- Game configs ----------
+// Add a new entry here whenever a new game is built - everything else
+// in this file reads from this map instead of hardcoding one game.
+const GAME_CONFIG = {
+
+    tictactoe: {
+        label: "Tic-Tac-Toe",
+        page: "tictactoe.html",
+        emptyBoard: () => Array(9).fill("")
+    },
+
+    connectfour: {
+        label: "Connect Four",
+        page: "connectfour.html",
+        emptyBoard: () => Array(42).fill("")
+    }
+
+};
 
 // ---------- Open/close the challenge popup from the game grid ----------
 
@@ -35,6 +55,9 @@ document.querySelectorAll(".gameTile:not(.locked)").forEach((tile) => {
     tile.addEventListener("click", () => {
 
         selectedGame = tile.dataset.game;
+
+        popupTitle.innerText =
+            `Challenge to ${GAME_CONFIG[selectedGame].label}`;
 
         opponentSearch.value = "";
         searchResultsBox.innerHTML = "";
@@ -137,7 +160,7 @@ async function sendChallenge(opponentUID) {
             player1: currentUID,
             player2: opponentUID,
 
-            board: ["", "", "", "", "", "", "", "", ""],
+            board: GAME_CONFIG[selectedGame].emptyBoard(),
             turn: currentUID,
 
             status: "pending",
@@ -153,7 +176,7 @@ async function sendChallenge(opponentUID) {
             from: currentUID,
 
             type: "game_invite",
-            text: "challenged you to Tic-Tac-Toe 🎮",
+            text: `challenged you to ${GAME_CONFIG[selectedGame].label} 🎮`,
 
             gameId: gameRef.id,
 
@@ -217,11 +240,14 @@ function watchIncomingInvites() {
                 console.log(e);
             }
 
+            const gameLabel =
+                (GAME_CONFIG[game.game] && GAME_CONFIG[game.game].label) || "a game";
+
             incomingInvites.innerHTML += `
             <div class="inviteCard">
-                <span>${challengerName} challenged you</span>
+                <span>${challengerName} challenged you to ${gameLabel}</span>
                 <div class="inviteActions">
-                    <button class="acceptBtn" data-id="${gameDoc.id}">Accept</button>
+                    <button class="acceptBtn" data-id="${gameDoc.id}" data-game="${game.game}">Accept</button>
                     <button class="declineBtn" data-id="${gameDoc.id}">Decline</button>
                 </div>
             </div>
@@ -237,7 +263,11 @@ function watchIncomingInvites() {
                     status: "active"
                 });
 
-                window.location.href = `tictactoe.html?gameId=${btn.dataset.id}`;
+                const page =
+                    (GAME_CONFIG[btn.dataset.game] && GAME_CONFIG[btn.dataset.game].page)
+                    || "tictactoe.html";
+
+                window.location.href = `${page}?gameId=${btn.dataset.id}`;
 
             };
 
@@ -330,10 +360,13 @@ async function renderActiveGames(gamesMap) {
             console.log(e);
         }
 
+        const gameLabel =
+            (GAME_CONFIG[game.game] && GAME_CONFIG[game.game].label) || "Game";
+
         activeGames.innerHTML += `
         <div class="gameCard" data-id="${gameId}">
-            <span>🎮 vs ${opponentName}</span>
-            <button class="challengeBtn" data-id="${gameId}">
+            <span>🎮 ${gameLabel} vs ${opponentName}</span>
+            <button class="challengeBtn" data-id="${gameId}" data-game="${game.game}">
                 Resume
             </button>
         </div>
@@ -344,9 +377,15 @@ async function renderActiveGames(gamesMap) {
     document.querySelectorAll(".gameCard .challengeBtn").forEach((btn) => {
 
         btn.onclick = () => {
-            window.location.href = `tictactoe.html?gameId=${btn.dataset.id}`;
+
+            const page =
+                (GAME_CONFIG[btn.dataset.game] && GAME_CONFIG[btn.dataset.game].page)
+                || "tictactoe.html";
+
+            window.location.href = `${page}?gameId=${btn.dataset.id}`;
+
         };
 
     });
 
-              }
+}
