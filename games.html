@@ -239,6 +239,7 @@ font-size:18px;
 <div class="container">
 
 <div class="gamesHeader">
+<a href="home.html" class="backBtn">←</a>
 <h1>🎮 Games</h1>
 </div>
 
@@ -249,10 +250,9 @@ font-size:18px;
 <h3>Tic-Tac-Toe</h3>
 </div>
 
-<div class="gameTile locked">
-<span>🃏</span>
-<h3>Game 2</h3>
-<p>Coming soon</p>
+<div class="gameTile" data-game="connectfour">
+<span>🔴</span>
+<h3>Connect Four</h3>
 </div>
 
 <div class="gameTile locked">
@@ -293,7 +293,7 @@ font-size:18px;
 <div class="popup">
 
 <div class="popupHeader">
-<h2>Challenge a member</h2>
+<h2 id="popupTitle">Challenge a member</h2>
 <button class="closePopup" id="closePopup">✕</button>
 </div>
 
