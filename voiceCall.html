@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Voice Call</title>
+
+<link rel="stylesheet" href="common.css">
+
+<style>
+
+.callContainer{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+}
+
+.callCard{
+    width:100%;
+    max-width:350px;
+    text-align:center;
+    padding:35px 25px;
+    border-radius:28px;
+
+    background:rgba(255,255,255,0.12);
+
+    backdrop-filter:blur(18px);
+
+    border:1px solid rgba(255,255,255,0.2);
+
+    box-shadow:
+    0 8px 32px rgba(0,0,0,0.25);
+}
+
+.callTitle{
+    font-size:16px;
+    opacity:0.8;
+    margin-bottom:25px;
+}
+
+.profileWrapper{
+    position:relative;
+    width:150px;
+    height:150px;
+    margin:auto;
+}
+
+.callerPhoto,
+.profilePlaceholder{
+
+    width:150px;
+    height:150px;
+
+    border-radius:50%;
+
+    border:4px solid rgba(255,255,255,0.3);
+
+    box-shadow:
+    0 0 25px rgba(0,255,255,0.4);
+
+}
+
+.callerPhoto{
+    object-fit:cover;
+}
+
+.profilePlaceholder{
+
+    display:none;
+
+    justify-content:center;
+    align-items:center;
+
+    font-size:60px;
+    font-weight:bold;
+
+    background:
+    linear-gradient(
+        135deg,
+        #00e5ff,
+        #00c853
+    );
+
+}
+
+#callerName{
+
+    margin-top:20px;
+    font-size:28px;
+
+}
+
+#callStatus{
+
+    margin-top:10px;
+    font-size:18px;
+    opacity:0.8;
+
+}
+
+#callTimer{
+
+    margin-top:10px;
+    font-size:24px;
+    font-weight:bold;
+
+}
+
+.buttonRow{
+
+    margin-top:35px;
+
+    display:flex;
+    justify-content:center;
+    gap:25px;
+
+}
+
+.circleBtn{
+
+    width:70px;
+    height:70px;
+
+    border:none;
+    border-radius:50%;
+
+    font-size:28px;
+
+    cursor:pointer;
+
+    background:rgba(255,255,255,0.15);
+
+    backdrop-filter:blur(10px);
+
+    box-shadow:
+    0 4px 15px rgba(0,0,0,0.2);
+
+}
+
+.endBtn{
+
+    background:#ff3b30;
+
+    color:white;
+
+}
+
+.circleBtn:active{
+
+    transform:scale(0.95);
+
+}
+
+@keyframes pulse{
+
+0%{
+transform:scale(1);
+}
+
+50%{
+transform:scale(1.05);
+}
+
+100%{
+transform:scale(1);
+}
+
+}
+
+.profileWrapper{
+
+animation:pulse 2s infinite;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="bg-circle c1"></div>
+<div class="bg-circle c2"></div>
+
+<div class="callContainer">
+
+    <div class="callCard">
+
+        <p class="callTitle">
+            📞 Voice Call
+        </p>
+
+        <div class="profileWrapper">
+
+            <img
+            id="callerPhoto"
+            class="callerPhoto"
+            src=""
+            alt="Profile">
+
+            <div
+            id="profilePlaceholder"
+            class="profilePlaceholder">
+
+                ?
+
+            </div>
+
+        </div>
+
+        <h2 id="callerName">
+            Loading...
+        </h2>
+
+        <p id="callStatus">
+            Connecting...
+        </p>
+
+        <p id="callTimer">
+            00:00
+        </p>
+
+        <div class="buttonRow">
+
+           <button
+            id="speakerBtn"
+            class="circleBtn">🔊 
+            </button>
+
+            <button
+            id="endCallBtn"
+            class="circleBtn endBtn">
+
+                📞
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script type="module" src="voiceCall.js"></script>
+
+</body>
+</html>
