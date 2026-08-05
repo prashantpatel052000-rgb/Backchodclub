@@ -1,44 +1,390 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
+
 <meta charset="UTF-8">
-<title>Incoming Call</title>
+
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<meta name="theme-color" content="#1565c0">
+
 <link rel="stylesheet" href="common.css">
+
+<title>Incoming Call</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    min-height:100vh;
+
+    background:
+        linear-gradient(
+            135deg,
+            #b9f6ff,
+            #54e4e7,
+            #70e5c0
+        );
+
+    font-family:Poppins, Arial, sans-serif;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    padding:20px;
+}
+
+/* Main call card */
+
+.callCard{
+
+    width:100%;
+    max-width:420px;
+
+    background:rgba(255,255,255,.55);
+
+    backdrop-filter:blur(12px);
+    -webkit-backdrop-filter:blur(12px);
+
+    border:1px solid rgba(255,255,255,.7);
+
+    border-radius:32px;
+
+    padding:35px 25px 30px;
+
+    text-align:center;
+
+    box-shadow:
+        0 15px 35px rgba(0,0,0,.15);
+
+    animation:cardAppear .5s ease;
+}
+
+/* Top */
+
+.callType{
+
+    font-size:20px;
+
+    color:#333;
+
+    margin-bottom:25px;
+
+}
+
+/* Caller avatar */
+
+.avatar{
+
+    width:145px;
+    height:145px;
+
+    margin:0 auto 22px;
+
+    border-radius:50%;
+
+    overflow:hidden;
+
+    background:
+        linear-gradient(
+            135deg,
+            #08d9a5,
+            #16c784
+        );
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    border:6px solid rgba(255,255,255,.7);
+
+    box-shadow:
+        0 10px 25px rgba(0,0,0,.15);
+}
+
+.avatar img{
+
+    width:100%;
+    height:100%;
+
+    object-fit:cover;
+
+    display:block;
+}
+
+.avatarFallback{
+
+    font-size:65px;
+
+    font-weight:800;
+
+    color:#111;
+}
+
+/* Caller name */
+
+#callerName{
+
+    font-size:30px;
+
+    font-weight:800;
+
+    margin:10px 0 8px;
+
+    color:#111;
+
+    word-break:break-word;
+}
+
+/* Status */
+
+.callStatus{
+
+    font-size:18px;
+
+    color:#444;
+
+    margin:10px 0 30px;
+}
+
+/* Buttons */
+
+.callButtons{
+
+    display:flex;
+
+    gap:18px;
+
+    justify-content:center;
+
+}
+
+.callButtons button{
+
+    border:none;
+
+    width:120px;
+
+    height:58px;
+
+    border-radius:30px;
+
+    font-size:17px;
+
+    font-weight:700;
+
+    cursor:pointer;
+
+    box-shadow:
+        0 7px 15px rgba(0,0,0,.15);
+
+    transition:.2s;
+}
+
+.callButtons button:active{
+
+    transform:scale(.94);
+}
+
+/* Accept */
+
+#acceptBtn{
+
+    background:#111;
+
+    color:white;
+}
+
+/* Reject */
+
+#rejectBtn{
+
+    background:#e53935;
+
+    color:white;
+}
+
+/* Small text */
+
+.freeText{
+
+    margin-top:25px;
+
+    font-size:14px;
+
+    color:#555;
+}
+
+@keyframes cardAppear{
+
+    from{
+        opacity:0;
+        transform:translateY(20px) scale(.96);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0) scale(1);
+    }
+
+}
+
+/* Phone screens */
+
+@media(max-width:480px){
+
+    body{
+        padding:15px;
+    }
+
+    .callCard{
+
+        padding:30px 20px 25px;
+
+        border-radius:28px;
+    }
+
+    .avatar{
+
+        width:125px;
+        height:125px;
+    }
+
+    .avatarFallback{
+
+        font-size:55px;
+    }
+
+    #callerName{
+
+        font-size:27px;
+    }
+
+    .callStatus{
+
+        font-size:17px;
+    }
+
+    .callButtons{
+
+        gap:12px;
+    }
+
+    .callButtons button{
+
+        width:115px;
+        height:55px;
+    }
+
+}
+
+/* Very small phones */
+
+@media(max-height:650px){
+
+    .callCard{
+
+        padding:22px 18px;
+    }
+
+    .avatar{
+
+        width:105px;
+        height:105px;
+
+        margin-bottom:15px;
+    }
+
+    .avatarFallback{
+
+        font-size:45px;
+    }
+
+    #callerName{
+
+        font-size:24px;
+    }
+
+    .callStatus{
+
+        margin-bottom:20px;
+    }
+
+}
+
+</style>
+
 </head>
+
 
 <body>
 
-<div class="container">
+<div class="callCard">
 
-<div class="card text-center">
+    <div class="callType">
+        📞 Incoming Voice Call
+    </div>
 
-<img id="callerPhoto"
-src="bc-logo.png"
-style="width:120px;height:120px;border-radius:50%;object-fit:cover;">
 
-<h2 id="callerName">Incoming Call</h2>
+    <div class="avatar">
 
-<p>📞 Voice Calling...</p>
+        <img
+            id="callerPhoto"
+            src=""
+            alt="Caller">
 
-<br>
+        <span
+            id="profilePlaceholder"
+            class="avatarFallback">
+            👤
+        </span>
 
-<button id="acceptBtn">
-Accept
-</button>
+    </div>
 
-<br><br>
 
-<button id="rejectBtn"
-style="background:#d32f2f;">
-Reject
-</button>
+    <h2 id="callerName">
+        Incoming Call
+    </h2>
+
+
+    <div class="callStatus">
+        📞 Calling you...
+    </div>
+
+
+    <div class="callButtons">
+
+        <button id="acceptBtn">
+            ✓ Accept
+        </button>
+
+        <button id="rejectBtn">
+            ✕ Reject
+        </button>
+
+    </div>
+
+
+    <div class="freeText">
+        Bakchod Club Voice Calling
+    </div>
 
 </div>
 
-</div>
 
-<script type="module" src="incomingCall.js"></script>
+<script
+    type="module"
+    src="incomingCall.js">
+</script>
 
 </body>
 
