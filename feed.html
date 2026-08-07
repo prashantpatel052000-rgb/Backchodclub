@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Latest Posts</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#1565c0">
+<link rel="stylesheet" href="common.css">
+
+<style>
+
+h1{
+text-align:center;
+font-size:34px;
+font-weight:800;
+color:#111;
+margin:5px 0 25px;
+}
+
+#feed{
+display:flex;
+flex-direction:column;
+gap:18px;
+}
+
+.post{
+background:white;
+padding:20px;
+border-radius:22px;
+box-shadow:0 8px 18px rgba(0,0,0,.12);
+}
+
+.post h3{
+font-size:22px;
+font-weight:700;
+margin-bottom:8px;
+color:#111;
+}
+
+.post small{
+display:block;
+font-size:14px;
+color:#666;
+margin-bottom:12px;
+}
+
+.post p{
+font-size:17px;
+line-height:1.7;
+color:#333;
+margin-bottom:15px;
+word-wrap:break-word;
+}
+
+.actions{
+display:flex;
+gap:20px;
+align-items:center;
+font-size:16px;
+font-weight:600;
+color:#555;
+padding-top:10px;
+border-top:1px solid #eee;
+}
+
+.actions span{
+cursor:pointer;
+transition:.2s;
+}
+
+.actions span:active{
+transform:scale(.95);
+}
+
+@media(max-width:480px){
+
+h1{
+font-size:30px;
+}
+
+.post{
+padding:18px;
+}
+
+.post h3{
+font-size:20px;
+}
+
+.post p{
+font-size:16px;
+}
+
+.actions{
+font-size:15px;
+gap:16px;
+}
+
+}
+
+/* ---------- Share To Friend Popup ---------- */
+
+.overlay{
+display:none;
+position:fixed;
+inset:0;
+background:rgba(0,0,0,0.45);
+align-items:flex-end;
+justify-content:center;
+z-index:50;
+}
+
+.overlay.show{
+display:flex;
+}
+
+.popup{
+background:white;
+width:100%;
+max-width:480px;
+border-radius:28px 28px 0 0;
+padding:24px 20px 30px;
+box-sizing:border-box;
+box-shadow:0 -12px 30px rgba(0,0,0,.18);
+}
+
+.popupHeader{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:16px;
+}
+
+.popupHeader h2{
+font-size:22px;
+}
+
+.closePopup{
+font-size:22px;
+background:none;
+border:none;
+color:#111;
+}
+
+.popupSearchBox{
+background:#f2f2f2;
+border-radius:40px;
+padding:14px 18px;
+display:flex;
+align-items:center;
+gap:10px;
+margin-bottom:16px;
+}
+
+#shareSearch{
+border:none;
+outline:none;
+flex:1;
+font-size:16px;
+background:transparent;
+}
+
+#shareResultsBox{
+background:white;
+border-radius:18px;
+overflow:hidden;
+}
+
+.opponentResult{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:15px;
+border-bottom:1px solid #eee;
+}
+
+.opponentResult button{
+background:#111;
+color:#fff;
+border:none;
+padding:8px 16px;
+border-radius:16px;
+font-weight:700;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>📰 Latest Posts</h1>
+
+<div id="feed">
+
+<p style="text-align:center;color:#777;">
+Loading posts...
+</p>
+
+</div>
+
+</div>
+
+<!-- ---------- Share To Friend Popup ---------- -->
+
+<div class="overlay" id="sharePopupOverlay">
+<div class="popup">
+
+<div class="popupHeader">
+<h2>Send to a friend</h2>
+<button class="closePopup" id="closeSharePopup">✕</button>
+</div>
+
+<div class="popupSearchBox">
+🔍
+<input id="shareSearch" placeholder="Search a member...">
+</div>
+
+<div id="shareResultsBox"></div>
+
+</div>
+</div>
+
+<script type="module" src="feed.js"></script>
+<script type="module" src="callListener.js"></script>
+
+</body>
+</html>
